@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using Crm.Maui.Persistence;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace Crm.Maui
 {
@@ -6,6 +7,10 @@ namespace Crm.Maui
     {
         public App()
         {
+            SQLitePCL.Batteries_V2.Init();
+            using var context = new CrmDbContext();
+            context.Database.EnsureCreated();
+
             InitializeComponent();
         }
 
