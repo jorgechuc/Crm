@@ -12,6 +12,9 @@ namespace Crm.Maui
             Routing.RegisterRoute(
                 nameof(CustomerEditPage),
                 typeof(CustomerEditPage));
+            Routing.RegisterRoute(
+                nameof(CustomerDetailPage),
+                typeof(CustomerDetailPage));
         }
     }
 }

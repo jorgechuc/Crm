@@ -34,18 +34,41 @@
                     <DataTemplate
                         x:DataType="{x:Type models:Customer}">
 
-                        <Grid
-                            RowDefinitions="Auto,Auto"
-                            Padding="4">
-                            <Label
-                                Grid.Row="0"
-                                Text="{Binding Path=FullName}"/>
-                            <Label
-                                Grid.Row="1"
-                                Text="{Binding Path=Email}"
-                                TextColor="DarkGray"/>
-                        </Grid>
+                        <SwipeView>
+                            <SwipeView.RightItems>
+                                <SwipeItem
+                                    Text="Eliminar"
+                                    BackgroundColor="IndianRed"
+                                    Command="{Binding 
+                                        Path=BindingContext.DeleteCustomerCommand,
+                                        Source={RelativeSource Mode=FindAncestor,
+                                        AncestorType={x:Type CollectionView}}}"
+                                    CommandParameter="{Binding}"/>
+                            </SwipeView.RightItems>
                         
+                            <Grid
+                                RowDefinitions="Auto,Auto"
+                                Padding="4">
+
+                                <Grid.GestureRecognizers>
+                                    <TapGestureRecognizer
+                                        Command="{Binding 
+                                            Path=BindingContext.ShowDetailFormCommand,
+                                            Source={RelativeSource Mode=FindAncestor,
+                                            AncestorType={x:Type CollectionView}}}"
+                                        CommandParameter="{Binding}"/>
+                                </Grid.GestureRecognizers>
+                                
+                                <Label
+                                    Grid.Row="0"
+                                    Text="{Binding Path=FullName}"/>
+                                <Label
+                                    Grid.Row="1"
+                                    Text="{Binding Path=Email}"
+                                    TextColor="DarkGray"/>
+                            </Grid>
+                        </SwipeView>
+
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
                 

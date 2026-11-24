@@ -52,5 +52,27 @@ namespace Crm.Maui.ViewModels
             Customers.Add(addedCustomer);
             return Task.CompletedTask;
         }
+
+        [RelayCommand]
+        public void DeleteCustomer(Customer customer)
+        {
+            using var dbContext = new CrmDbContext();
+            dbContext.Customers.Remove(customer);
+            dbContext.SaveChanges();
+
+            Customers.Remove(customer);
+        }
+
+        [RelayCommand]
+        public async Task ShowDetailFormAsync(Customer customer)
+        {
+            await Shell.Current.GoToAsync(
+                nameof(CustomerDetailPage),
+                parameters: new Dictionary<string, object>
+                {
+                    //{"ParentRefreshAction", (Func<Customer,Task>) RefreshEditedAsync},
+                    {"Item", customer },
+                });
+        }
     }
 }
